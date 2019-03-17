@@ -272,7 +272,8 @@
           phone: formOrder.find('input[name=phone]').val()
         }
       );
-
+      
+      formOrder.trigger('reset');
       $('.close').click();
 
       e.preventDefault();
