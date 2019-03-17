@@ -10562,7 +10562,7 @@ html {
 }
 
 .text-white-75 {
-  color: rgba(255, 255, 255, 0.75);
+  color: #fff;
 }
 
 hr.divider {
@@ -10666,8 +10666,8 @@ hr.light {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 72px);
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(92, 160, 66, 0.4)), to(rgba(92, 77, 140, 0.3))), url("../img/bg-main.jpg");
-  background: linear-gradient(to bottom, rgba(92, 160, 66, 0.4) 0%, rgba(92, 77, 140, 0.3) 100%), url("../img/bg-main.jpg");
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(92, 160, 66, 0.4)), to(rgba(0, 0, 0, 0.5))), url("../img/bg-main.jpg");
+  background: linear-gradient(to bottom, rgba(92, 160, 66, 0.4) 0%, rgba(0, 0, 0, 0.5) 100%), url(../img/bg-main.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -10775,7 +10775,7 @@ header.masthead h1 {
   font-size: 64px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   .logo {
     right: 17px;
     top: 4px;
