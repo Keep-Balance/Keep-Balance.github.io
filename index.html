@@ -248,7 +248,26 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/creative.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyDOhjkWBYF_B1CHUJdrZd44jW0_X_-NoRo",
+      authDomain: "keepbalance.firebaseapp.com",
+      databaseURL: "https://keepbalance.firebaseio.com",
+      projectId: "keepbalance",
+      storageBucket: "keepbalance.appspot.com",
+      messagingSenderId: "660135337584"
+    };
+    firebase.initializeApp(config);
 
+    var ref = firebase.database().ref();
+
+    ref.on("value", function(snapshot) {
+      console.log(snapshot.val());
+    }, function (error) {
+      console.log("Error: " + error.code);
+    });
+  </script>
 </body>
 
 </html>
