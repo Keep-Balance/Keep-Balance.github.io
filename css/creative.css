@@ -10775,7 +10775,30 @@ header.masthead h1 {
   font-size: 64px;
 }
 
+.price-block {
+  width: 30%;
+  height: 50px;
+  margin: 20px auto;
+}
+
+.price {
+  float: right;
+  font-size: 35px;
+}
+
+.old-price {
+  margin-top: 10px;
+  color: #d3091e;
+  font-size: 25px;
+  float: left;
+  text-decoration: line-through;
+}
+
 @media screen and (max-width: 768px) {
+  .price-block {
+    width: 100%;
+  }
+
   .logo {
     right: 17px;
     top: 4px;
@@ -10786,3 +10809,4 @@ header.masthead h1 {
     height: auto;
   }
 }
+
