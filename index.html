@@ -198,6 +198,9 @@
               <input name="phone" type="tel" class="form-control" placeholder="Ваш телефон" required />
             </div>
             <div class="form-group">
+              <input type="number" name="count" class="form-control" placeholder="К-сть" min="1" />              
+            </div>
+            <div class="form-group">
               <button class="btn btn-primary">Відправити</button>
             </div>
           </form>
@@ -273,7 +276,8 @@
         {
           firstName: formOrder.find('input[name=firstName]').val(),
           lastName: formOrder.find('input[name=lastName]').val(),
-          phone: formOrder.find('input[name=phone]').val()
+          phone: formOrder.find('input[name=phone]').val(),
+          count: formOrder.find('input[name=count]').val()
         }
       );
       
