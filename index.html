@@ -27,7 +27,7 @@
 </head>
 
 <body id="page-top">
-
+  <div id="onload"></div>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
@@ -56,11 +56,11 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center justify-content-center text-center">
         <div class="col-lg-10 align-self-end">
-          <h1 class="text-uppercase text-white font-weight-bold">Найкращий тренажер для вас</h1>
+          <h1 class="text-uppercase text-white font-weight-bold" id="headTitle">Найкращий тренажер для вас</h1>
           <hr class="divider my-4">
         </div>
         <div class="col-lg-8 align-self-baseline">
-          <p class="text-white-75 font-weight-light mb-5">Aloha як кажуть на гаваях,якщо ви хочете відчути себе на хвилях не виходячи з дому тоді ви по адресу! Наша компанія займається виготовленням унікального тренажера в свому класі, за допомогою нього ви зможете доповнити свої заняття фітнесом а також зацікавити дітей в новому напрямку розвитку</p>
+          <p class="text-white-75 font-weight-light mb-5" id="headDesc">Aloha як кажуть на гаваях,якщо ви хочете відчути себе на хвилях не виходячи з дому тоді ви по адресу! Наша компанія займається виготовленням унікального тренажера в свому класі, за допомогою нього ви зможете доповнити свої заняття фітнесом а також зацікавити дітей в новому напрямку розвитку</p>
         </div>
       </div>
     </div>
@@ -286,6 +286,20 @@
 
       e.preventDefault();
     });  
+
+    firebase.database().ref("info/ua").once("value", function(snapshot) {
+      var data = snapshot.val();
+      
+      populateInfo(data);
+    });
+
+    function populateInfo(data) {
+      Object.keys(data).forEach(function(key) {
+        $("#" + key).html(data[key]);
+      });
+
+      $("#onload").fadeOut("slow");
+    }
   </script>
 </body>
 
