@@ -82,86 +82,7 @@
   <!-- Portfolio Section -->
   <section id="portfolio">
     <div class="container-fluid p-0">
-      <div class="row no-gutters">
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/img-1.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/img-1.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/img-2.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/img-2.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/img-3.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/img-3.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/img-4.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/img-4.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/img-5.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/img-5.jpg" alt="">
-            <div class="portfolio-box-caption">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="img/portfolio/fullsize/img-6.jpg">
-            <img class="img-fluid" src="img/portfolio/thumbnails/img-6.jpg" alt="">
-            <div class="portfolio-box-caption p-3">
-              <div class="project-category text-white-50">
-                Category
-              </div>
-              <div class="project-name">
-                Project Name
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
+      <div class="row no-gutters" id="photosBlock"></div>
     </div>
   </section>
 
@@ -288,9 +209,11 @@
     });  
 
     firebase.database().ref("info/ua").once("value", function(snapshot) {
-      var data = snapshot.val();
-      
-      populateInfo(data);
+      populateInfo(snapshot.val());
+    });
+
+    firebase.database().ref("photos").on("value", function(snapshot) {
+      populatePhotos(snapshot.val());
     });
 
     function populateInfo(data) {
@@ -299,6 +222,23 @@
       });
 
       $("#onload").fadeOut("slow");
+    }
+
+    function populatePhotos(photos) {
+      for(let key in photos) {
+        let photo = photos[key];
+        let photoBlock = '<div class="col-lg-4 col-sm-6">';
+        
+        photoBlock += '<a class="portfolio-box" href="' + photo.urlLarge + '">';
+        photoBlock += '<img class="img-fluid" src="' + photo.urlSmall + '" alt="">';
+        photoBlock += '<div class="portfolio-box-caption">';    
+        photoBlock += '<div class="project-name">' + photo.title + '</div>'
+        photoBlock += '</div>';
+        photoBlock += '</a>';
+        photoBlock += '</div>';
+
+        $('#photosBlock').append(photoBlock);
+      }
     }
   </script>
 </body>
