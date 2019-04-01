@@ -38,13 +38,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">Про нас</a>
+            <a class="nav-link js-scroll-trigger" href="#about" id="menuAbout"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#portfolio">Товар</a>
+            <a class="nav-link js-scroll-trigger" href="#portfolio" id="menuProducts"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Контакти</a>
+            <a class="nav-link js-scroll-trigger" href="#contact" id="menuContact"></a>
           </li>
         </ul>
       </div>
@@ -89,12 +89,12 @@
   <!-- Call to Action Section -->
   <section class="page-section bg-dark text-white">
     <div class="container text-center">
-      <h2 class="mb-4">Тисни замовити і заповнюй форму</h2>
+      <h2 class="mb-4" id="priceTitle"></h2>
       <div class="price-block">
-          <span class="old-price">2400 грн.</span>
-          <span class="price">1800 грн.</span>
+          <span class="old-price" id="priceOld"></span>
+          <span class="price" id="priceNew"></span>
       </div>  
-      <button class="btn btn-light btn-xl" data-toggle="modal" data-target="#toOrder">Замовити</button>
+      <button class="btn btn-light btn-xl" data-toggle="modal" data-target="#toOrder" id="priceOrderButton"></button>
     </div>
 
     
@@ -104,30 +104,30 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Замовити</h4>
+          <h4 class="modal-title" id="modalTitle"></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <form id="formOrder">
             <div class="form-group">
-              <input name="name" type="text" class="form-control" placeholder="Ваше імя" required />
+              <input name="name" type="text" class="form-control" id="modalFieldName" required />
             </div>
             <div class="form-group">
-              <input name="phone" type="text" class="form-control" placeholder="Ваш телефон" required minlength="10" />
+              <input name="phone" type="text" class="form-control" id="modalFieldPhone" required minlength="10" />
             </div>
             <div class="form-group">
-              <input name="count" type="number" class="form-control" placeholder="К-сть" min="1" value="1" required />              
+              <input name="count" type="number" class="form-control" min="1" value="1" required />              
             </div>
             <div class="form-group">
-              <input name="promo" type="number" class="form-control" placeholder="Код" minlength="5" minlength="5" />
+              <input name="promo" type="number" class="form-control" id="modalFieldPromo" minlength="5" minlength="5" />
             </div>
             <div class="form-group">
-              <button class="btn btn-primary">Відправити</button>
+              <button class="btn btn-primary" id="modalSendButton"></button>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCloseButton"></button>
         </div>
       </div>
   
@@ -146,12 +146,12 @@
       </div>
       <div class="row">
         <div class="col col-lg-4 ml-auto text-center">
-          <a href="tel:+380957861868">
+          <a href="" id="tel">
             <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
           </a>
         </div>
         <div class="col col-lg-4 mr-auto text-center">
-          <a href="https://www.instagram.com/keep__balance/">
+          <a href="" id="instagram">
             <i class="fa fa-instagram fa-3x mb-3 text-muted insta"></i>
           </a>
         </div>
@@ -162,7 +162,7 @@
   <!-- Footer -->
   <footer class="bg-light py-5">
     <div class="container">
-      <div class="small text-center text-muted">&copy;Keep Balance - 2019</div>
+      <div class="small text-center text-muted" id="copyright"></div>
     </div>
   </footer>
 
@@ -218,8 +218,17 @@
 
     function populateInfo(data) {
       Object.keys(data).forEach(function(key) {
-        $("#" + key).html(data[key]);
+        var el = $("#" + key);
+
+        if(el.is('input')) {
+          el.attr('placeholder', data[key]);
+        } else {
+          el.html(data[key]);
+        }
       });
+
+      $("#tel").attr("href", "tel:" + data['contactPhone']);
+      $("#instagram").attr("href", data['contactInstagram']);
 
       $("#onload").fadeOut("slow");
     }
